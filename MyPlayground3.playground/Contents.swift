@@ -2,7 +2,10 @@
   
 import UIKit
 import PlaygroundSupport
+import Foundation
 
+let fontURL = Bundle.main.url(forResource: "Roboto-Regular", withExtension: "ttf")! as CFURL
+CTFontManagerRegisterFontsForURL(fontURL, CTFontManagerScope.process, nil)
 
 
 class MyViewController : UIViewController {
@@ -11,17 +14,26 @@ class MyViewController : UIViewController {
         view.backgroundColor = .myWhite
 
         let label1 = UILabel()
-        label1.frame = CGRect(x: 260, y: 210, width: 250, height: 20)
+        label1.frame = CGRect(x: 200, y: 210, width: 400, height: 30)
+        label1.font = UIFont(name: "HelveticaNeue", size: 30)
         label1.text = "Olá, que legal ter você aqui!"
         label1.textColor = .black
         
+        for family in UIFont.familyNames {
+            print("\(family)")
+            for name in UIFont.fontNames(forFamilyName: family) {
+                print(" \(name)")
+            }
+        }
+        
         let label2 = UILabel()
-        label2.frame = CGRect(x: 260, y: 230, width: 250, height: 20)
+        label2.frame = CGRect(x: 200, y: 240, width: 400, height: 30)
+        label2.font = UIFont(name: "HelveticaNeue", size: 30)
         label2.text = "Qual o seu nome?"
         label2.textColor = .black
         
         let okButton = UIButton()
-        okButton.frame = CGRect(x: 470, y: 290, width: 50, height: 25)
+        okButton.frame = CGRect(x: 550, y: 500, width: 50, height: 31)
         okButton.setTitle("ok", for: .normal)
         okButton.setTitleColor(.white, for: .normal)
         okButton.backgroundColor = .myRed
@@ -30,14 +42,14 @@ class MyViewController : UIViewController {
         okButton.addTarget(nil, action: #selector(tapButton), for: .touchUpInside)
         
         let textField = UITextField()
-        textField.frame = CGRect(x: 260, y: 290, width: 200, height: 25)
+        textField.frame = CGRect(x: 200, y: 500, width: 320, height: 30)
         textField.backgroundColor = .white
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 2
         
         let baloom = UIImage(named: "Group 5" )
         let baloomImageView = UIImageView(image: baloom)
-        baloomImageView.frame = CGRect(x: 200, y: 180, width: 400, height: 100)
+        baloomImageView.frame = CGRect(x: 100, y: 150, width: 600, height: 200)
         
         view.addSubview(baloomImageView)
         view.addSubview(label1)
@@ -49,7 +61,7 @@ class MyViewController : UIViewController {
     
     @objc func tapButton(){
         print("apertou ok")
-        present(MainViewController,animated: true,completion: nil)
+        present(MainViewController,animated: false,completion: nil)
     }
 }
 
@@ -68,6 +80,21 @@ class mainViewController : UIViewController {
         instructionsBox.layer.masksToBounds = true
         instructionsBox.layer.cornerRadius = 10
         
+        let howToLabel = UILabel()
+        howToLabel.text = "Como Fazer"
+        howToLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 21)
+        howToLabel.frame = CGRect(x: 26, y: 170, width: 150, height: 30)
+        
+        let instruction1 = UILabel()
+        instruction1.frame = CGRect(x: 10, y: 200, width: 150, height: 30)
+        instruction1.text = "1.Dobre um poucos dois joelhos"
+        instruction1.font = UIFont(name:"HelveticaNeue", size:18)
+        
+        let instruction2 = UILabel()
+        instruction2.frame = CGRect(x: 10, y: 220, width: 150, height: 30)
+        instruction2.text = "2.Pule"
+        instruction2.font = UIFont(name:"HelveticaNeue", size:18)
+        
         let menuButton = UIButton()
         menuButton.frame = CGRect(x: 10, y: 10, width: 30, height:30 )
         menuButton.backgroundColor = .myRed
@@ -78,22 +105,29 @@ class mainViewController : UIViewController {
         actionBox.frame = CGRect(x: 350, y:15 , width: 100, height: 20)
         actionBox.backgroundColor = .myYellow
         actionBox.text = "Pular"
+        actionBox.font = UIFont(name: "HelveticaNeue", size: 16)
         actionBox.textAlignment = .center
         
         let danceButton = UIButton()
         danceButton.frame = CGRect(x: 325, y: 450, width: 150, height: 30)
+        danceButton.setTitle("Dança de novo, G", for: .normal)
+        danceButton.setTitleColor(.white, for: .normal)
         danceButton.backgroundColor = .myRed
         danceButton.layer.masksToBounds = true
         danceButton.layer.cornerRadius = 5
         
         let hardButton = UIButton()
         hardButton.frame = CGRect(x: 240, y: 500, width: 150, height: 30)
+        hardButton.setTitle("Esta muito difícil", for: .normal)
+        hardButton.setTitleColor(.white, for: .normal)
         hardButton.backgroundColor = .myRed
         hardButton.layer.masksToBounds = true
         hardButton.layer.cornerRadius = 5
         
         let gotItButton = UIButton()
         gotItButton.frame = CGRect(x: 410, y: 500, width: 150, height: 30)
+        gotItButton.setTitle("Consegui", for: .normal)
+        gotItButton.setTitleColor(.white, for: .normal)
         gotItButton.backgroundColor = .myRed
         gotItButton.layer.masksToBounds = true
         gotItButton.layer.cornerRadius = 5
@@ -105,6 +139,9 @@ class mainViewController : UIViewController {
         view.addSubview(instructionsBox)
         view.addSubview(hardButton)
         view.addSubview(gotItButton)
+        view.addSubview(howToLabel)
+        view.addSubview(instruction1)
+        view.addSubview(instruction2)
         
         self.view = view
     }
