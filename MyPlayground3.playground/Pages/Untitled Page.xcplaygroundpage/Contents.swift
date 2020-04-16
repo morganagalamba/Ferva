@@ -3,6 +3,7 @@
 import UIKit
 import PlaygroundSupport
 import Foundation
+import SpriteKit
 
 let fontURL = Bundle.main.url(forResource: "Roboto-Regular", withExtension: "ttf")! as CFURL
 CTFontManagerRegisterFontsForURL(fontURL, CTFontManagerScope.process, nil)
@@ -12,20 +13,26 @@ class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .myWhite
-    
+                
+        let ryuView = UIImageView(frame: CGRect(x: 820, y: 300, width: 1080, height: 920))
+
+        let comecoNome = "dedeHiteste_"
+        let índices = [0,1,2,3,4,5,6,7,8,9,11,12,13]
+        var imagensAnimação : [UIImage] = []
+
+        for índice in índices {
+            let umaPoseDoRyu = UIImage(named: "\(comecoNome)\(índice).png")
+            imagensAnimação.append(umaPoseDoRyu!)
+        }
+        
+        ryuView.animationImages = imagensAnimação
+        ryuView.animationDuration = 1.2
         
         let label1 = UILabel()
         label1.frame = CGRect(x: 350, y: 240, width: 745, height: 80)
         label1.font = UIFont(name: "HelveticaNeue", size: 50)
         label1.text = "Olá, que legal ter você aqui!"
         label1.textColor = .black
-        
-        /*for family in UIFont.familyNames {
-            print("\(family)")
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print(" \(name)")
-            }
-        }*/
         
         let label2 = UILabel()
         label2.frame = CGRect(x: 350, y: 320, width: 500, height: 70)
@@ -36,6 +43,7 @@ class MyViewController : UIViewController {
         let okButton = UIButton()
         okButton.frame = CGRect(x: 1050, y: 640, width: 91, height: 72)
         okButton.setTitle("ok", for: .normal)
+        okButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 40)
         okButton.setTitleColor(.white, for: .normal)
         okButton.backgroundColor = .myRed
         okButton.layer.masksToBounds = true
@@ -52,22 +60,28 @@ class MyViewController : UIViewController {
         let baloomImageView = UIImageView(image: baloom)
         baloomImageView.frame = CGRect(x: 225, y: 150, width: 990, height: 350)
         
+        ryuView.startAnimating()
+        
+        
+        
         view.addSubview(baloomImageView)
         view.addSubview(label1)
         view.addSubview(label2)
         view.addSubview(okButton)
         view.addSubview(textField)
+        view.addSubview(ryuView)
+        
         self.view = view
     }
     
     @objc func tapButton(){
         print("apertou ok")
-        navigationController?.pushViewController(secondViewController, animated: false)
+        navigationController?.pushViewController(thirdViewController, animated: false)
     }
     
     
 }
-
+/*
 class SecondViewController : UIViewController {
     override func loadView() {
         let view = UIView()
@@ -122,11 +136,26 @@ class SecondViewController : UIViewController {
         navigationController?.pushViewController(thirdViewController, animated: false)
     }
 }
+*/
 
 class ThirdViewController : UIViewController {
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .myWhite
+        
+        let ryuView = UIImageView(frame: CGRect(x: 820, y: 300, width: 1080, height: 920))
+
+        let comecoNome = "dedeHiteste_"
+        let índices = [0,1,2,3,4,5,6,7,8,9,11,12,13]
+        var imagensAnimação : [UIImage] = []
+
+        for índice in índices {
+            let umaPoseDoRyu = UIImage(named: "\(comecoNome)\(índice).png")
+            imagensAnimação.append(umaPoseDoRyu!)
+        }
+        
+        ryuView.animationImages = imagensAnimação
+        ryuView.animationDuration = 1.2
         
         let groundBox = UIView()
         groundBox.frame = CGRect(x: 0, y: 550, width: 1440, height: 350)
@@ -142,6 +171,7 @@ class ThirdViewController : UIViewController {
         let danceButton = UIButton()
         danceButton.frame = CGRect(x: 561, y: 730, width: 318, height: 60)
         danceButton.setTitle("Entendi", for: .normal)
+        danceButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 40)
         danceButton.setTitleColor(.white, for: .normal)
         danceButton.addTarget(nil, action: #selector(tapButton), for: .touchUpInside)
         danceButton.backgroundColor = .myRed
@@ -151,6 +181,7 @@ class ThirdViewController : UIViewController {
         view.addSubview(actionBox)
         view.addSubview(groundBox)
         view.addSubview(danceButton)
+        view.addSubview(ryuView)
         
         self.view = view
     }
@@ -208,6 +239,7 @@ class MainViewController : UIViewController {
         let danceButton = UIButton()
         danceButton.frame = CGRect(x: 561, y: 670, width: 318, height: 60)
         danceButton.setTitle("Dança de novo, Gi", for: .normal)
+        danceButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 30)
         danceButton.setTitleColor(.white, for: .normal)
         danceButton.backgroundColor = .myRed
         danceButton.layer.masksToBounds = true
@@ -216,6 +248,7 @@ class MainViewController : UIViewController {
         let hardButton = UIButton()
         hardButton.frame = CGRect(x: 397, y: 740, width: 318, height: 60)
         hardButton.setTitle("Esta muito difícil", for: .normal)
+        hardButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 30)
         hardButton.setTitleColor(.white, for: .normal)
         hardButton.backgroundColor = .myRed
         hardButton.layer.masksToBounds = true
@@ -224,6 +257,7 @@ class MainViewController : UIViewController {
         let gotItButton = UIButton()
         gotItButton.frame = CGRect(x: 725, y: 740, width: 318, height: 60)
         gotItButton.setTitle("Consegui", for: .normal)
+        gotItButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 30)
         gotItButton.setTitleColor(.white, for: .normal)
         gotItButton.backgroundColor = .myRed
         gotItButton.layer.masksToBounds = true
@@ -247,7 +281,7 @@ class MainViewController : UIViewController {
 let navigation = UINavigationController(screenType: .mac)
 
 let mainViewController = MainViewController()
-let secondViewController = SecondViewController()
+//let secondViewController = SecondViewController()
 let thirdViewController = ThirdViewController()
 let vc = MyViewController()
 
