@@ -16,6 +16,8 @@ var dedeJumpAnimation : [UIImage] = []
 var dedeFrevoAnimation : [UIImage] = []
 var aux = 0;
 
+var name = ""
+
 while aux<90 {
     
     let auxString = String(aux)
@@ -38,6 +40,9 @@ while aux<90 {
 }
 
 class MyViewController : UIViewController {
+    
+    var textField = UITextField()
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .myWhite
@@ -70,7 +75,7 @@ class MyViewController : UIViewController {
         okButton.layer.cornerRadius = 5
         okButton.addTarget(nil, action: #selector(tapButton), for: .touchUpInside)
         
-        let textField = UITextField()
+        
         textField.frame = CGRect(x: 290, y: 640, width: 719, height: 75)
         textField.backgroundColor = .white
         textField.layer.masksToBounds = true
@@ -81,8 +86,6 @@ class MyViewController : UIViewController {
         baloomImageView.frame = CGRect(x: 225, y: 150, width: 990, height: 350)
         
         dedeView.startAnimating()
-        
-        
         
         view.addSubview(baloomImageView)
         view.addSubview(label1)
@@ -96,13 +99,14 @@ class MyViewController : UIViewController {
     
     @objc func tapButton(){
         print("apertou ok")
+        name = textField.text!
+        print(name)
         navigationController?.pushViewController(thirdViewController, animated: false)
     }
-    
-    
 }
 
 class ThirdViewController : UIViewController {
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .myWhite
@@ -116,16 +120,16 @@ class ThirdViewController : UIViewController {
         groundBox.frame = CGRect(x: 0, y: 550, width: 1440, height: 350)
         groundBox.backgroundColor = .myGround
         
-        let actionBox = UILabel()
+        /*let actionBox = UILabel()
         actionBox.frame = CGRect(x: 631, y:15 , width: 178, height: 33)
         actionBox.backgroundColor = .myYellow
         actionBox.text = "Pular"
         actionBox.font = UIFont(name: "HelveticaNeue", size: 20)
-        actionBox.textAlignment = .center
+        actionBox.textAlignment = .center*/
         
         let danceButton = UIButton()
-        danceButton.frame = CGRect(x: 561, y: 730, width: 318, height: 60)
-        danceButton.setTitle("Entendi", for: .normal)
+        danceButton.frame = CGRect(x: 561, y: 730, width: 318, height: 50)
+        danceButton.setTitle("Vamos dançar", for: .normal)
         danceButton.titleLabel?.font =  UIFont(name: "HelveticaNeue", size: 40)
         danceButton.setTitleColor(.white, for: .normal)
         danceButton.addTarget(nil, action: #selector(tapButton), for: .touchUpInside)
@@ -133,11 +137,33 @@ class ThirdViewController : UIViewController {
         danceButton.layer.masksToBounds = true
         danceButton.layer.cornerRadius = 5
         
+        let baloom = UIImage(named: "balao conversa" )
+        let baloomImageView = UIImageView(image: baloom)
+        baloomImageView.frame = CGRect(x: 900, y: 40, width: 450, height: 300)
+        
+        
+        let baloomText1 = UILabel()
+        baloomText1.frame = CGRect(x: 960, y: 100, width: 400, height: 40)
+        baloomText1.text = "Ola, \(name)!"
+        baloomText1.font = UIFont(name:"HelveticaNeue", size:36)
+        baloomText1.lineBreakMode = .byWordWrapping
+        baloomText1.numberOfLines = 2
+        
+        let baloomText2 = UILabel()
+        baloomText2.frame = CGRect(x: 960, y: 110, width: 400, height: 200)
+        baloomText2.text = "Meu nome é Dede, vai ser um prazer dançar com você!"
+        baloomText2.font = UIFont(name:"HelveticaNeue", size:36)
+        baloomText2.lineBreakMode = .byWordWrapping
+        baloomText2.numberOfLines = 3
+        
         dedeView.startAnimating()
         
-        view.addSubview(actionBox)
+        //view.addSubview(actionBox)
         view.addSubview(groundBox)
         view.addSubview(danceButton)
+        view.addSubview(baloomImageView)
+        view.addSubview(baloomText1)
+        view.addSubview(baloomText2)
         view.addSubview(dedeView)
         
         self.view = view
@@ -255,7 +281,7 @@ class Main2ViewController : UIViewController {
         let dedeView = UIImageView(frame: CGRect(x: 300, y: 200, width: 900, height: 500))
         
         dedeView.animationImages = dedeFrevoAnimation
-        dedeView.animationDuration = 1.5
+        dedeView.animationDuration = 1.7
         
         let groundBox = UIView()
         groundBox.frame = CGRect(x: 0, y: 550, width: 1440, height: 350)
